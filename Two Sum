@@ -1,0 +1,23 @@
+Question: https://leetcode.com/problems/two-sum/description/
+
+Solution:
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function (nums, target) {
+    var seen = {};
+    const len = nums.length;
+
+    for(let i = 0; i<len; i++){
+        let compliment = target - nums[i];
+        if(seen.hasOwnProperty(compliment)){
+            return [i, seen[compliment]];
+        } else {
+            seen[nums[i]] = i;
+        }
+    }
+    return [];
+};
