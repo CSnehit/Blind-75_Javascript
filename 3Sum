@@ -1,0 +1,30 @@
+Question: https://leetcode.com/problems/3sum/description/
+
+Solution: 
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function (nums) {
+    let res = [];
+
+    let uni = Array.from(nums);
+    uni.sort((a, b) => a - b);
+
+    for (let i = 0; i < uni.length; i++) {
+        var seen = {};
+        if(uni[i-1] === uni[i]){
+            continue;
+        }
+        for (let j = i + 1; j < uni.length; j++) {
+            let compliment = (-1 * uni[i]) - uni[j];
+            if (seen.hasOwnProperty(compliment)) {
+                res.push([uni[i], compliment, uni[j]])
+            }
+            seen[uni[j]] = j;
+        }
+    }
+    const unique = new Set(res.map(arr => JSON.stringify(arr)));
+    const uniRes = Array.from(unique).map(str => JSON.parse(str));
+    return uniRes;
+};
