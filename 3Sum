@@ -11,17 +11,21 @@ var threeSum = function (nums) {
     let uni = Array.from(nums);
     uni.sort((a, b) => a - b);
 
-    for (let i = 0; i < uni.length; i++) {
-        var seen = {};
-        if(uni[i-1] === uni[i]){
+    for (let k = 0; k < (uni.length - 2); k++) {
+        if(uni[k-1] === uni[k]){
             continue;
         }
-        for (let j = i + 1; j < uni.length; j++) {
-            let compliment = (-1 * uni[i]) - uni[j];
-            if (seen.hasOwnProperty(compliment)) {
-                res.push([uni[i], compliment, uni[j]])
+        let i = k + 1;
+        let j = uni.length - 1;
+        while (i < j) {
+            if ((uni[i] + uni[j]) === (-1 * uni[k])){
+                res.push([uni[k], uni[i], uni[j]]);
+                i++, j--;
+            } else if((uni[i] + uni[j]) > (-1 * uni[k])){
+                break;
+            } else {
+                i++;
             }
-            seen[uni[j]] = j;
         }
     }
     const unique = new Set(res.map(arr => JSON.stringify(arr)));
