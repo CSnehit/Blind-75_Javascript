@@ -1,0 +1,23 @@
+Question: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+
+Solution: 
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+    let lon = {};
+    let ma = 0;
+    let curr = 0
+    for (let i = 0; i < s.length; i++) {
+        if (lon.hasOwnProperty(s[i])) {
+            ma = Math.max(ma, curr);
+            lon = {};
+            curr = 0;
+        }
+        lon[s[i]] = 1;
+        curr++;
+    }
+    return ma;
+
+};
