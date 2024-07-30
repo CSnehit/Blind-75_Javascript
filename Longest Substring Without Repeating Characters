@@ -6,18 +6,22 @@ Solution:
  * @return {number}
  */
 var lengthOfLongestSubstring = function (s) {
-    let lon = {};
-    let ma = 0;
-    let curr = 0
-    for (let i = 0; i < s.length; i++) {
-        if (lon.hasOwnProperty(s[i])) {
-            ma = Math.max(ma, curr);
-            lon = {};
-            curr = 0;
-        }
-        lon[s[i]] = 1;
-        curr++;
-    }
-    return ma;
+    let longstr = 0;
+    let set = new Set();
 
+    // Pointers
+    let left = 0;
+    let right = 0;
+
+    while (right < s.length) {
+        if (!set.has(s[right])) {
+            set.add(s[right]);
+            longstr = Math.max(longstr, set.size);
+            right++;
+        } else {
+            set.delete(s[left]);
+            left++;
+        }
+    }
+    return longstr;
 };
