@@ -1,0 +1,37 @@
+Question: https://leetcode.com/problems/minimum-window-substring/description/
+
+Solution: 
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function (s, t) {
+    let sfreq = {};
+    let tfreq = {};
+
+    let left = 0;
+    let right = 0;
+
+    for (let i = 0; i < t.length; i++) {
+        tfreq[t[i]] = tfreq[t[i]]+1 || 1;
+    }
+
+    while (right < s.length) {
+        sfreq[s[right]] = sfreq[s[right]] + 1 || 1;
+
+        while (sfreq[s[left]] !== tfreq[s[left]]) {
+            // if (sfreq[s[left]] > tfreq[s[left]]) {
+                sfreq[s[left]]--;
+            // }
+            left++
+        }
+        right++;
+    }
+
+    if (Object.keys(tfreq).every(key => sfreq[key] >= tfreq[key])) {
+        return s.substr(left, right);
+    } else {
+        return "";
+    }
+};
