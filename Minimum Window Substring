@@ -34,4 +34,5 @@ var minWindow = function (s, t) {
     } else {
         return "";
     }
+
 };
