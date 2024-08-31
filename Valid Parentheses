@@ -1,0 +1,26 @@
+Question: https://leetcode.com/problems/valid-parentheses/submissions/1374525098/
+
+Solution: 
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    let seen = [];
+
+    for(let i=0; i<s.length; i++){
+        let seenLast = seen.length-1;
+        if(s[i] === ')' && seen[seenLast] === '('){
+            seen.pop();
+        } else if(s[i] === '}' && seen[seenLast] === '{'){
+            seen.pop();
+        } else if(s[i] === ']' && seen[seenLast] === '['){
+            seen.pop();
+        } else if(s[i] === '(' || s[i] === '{' || s[i] === '['){
+            seen.push(s[i]);
+        } else {
+            return false;
+        }
+    }
+    return (!seen.length);
+};
