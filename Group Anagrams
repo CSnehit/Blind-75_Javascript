@@ -1,0 +1,15 @@
+Question: https://leetcode.com/problems/group-anagrams/description/
+
+Solution: 
+var groupAnagrams = function(strs) {
+    let seen = {};
+   for(let item of strs){
+    let elm = item.split('').sort().join('');
+    if(seen.hasOwnProperty(elm)){
+        seen[elm].push(item);
+    } else {
+        seen[elm] = [item];
+    }
+   }
+   return Object.values(seen);
+};
